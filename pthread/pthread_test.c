@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	num_threads = atoi(argv[1]);
 	threads = (pthread_t *)malloc(sizeof(pthread_t) * num_threads);
 
-	//create threads
+	// create threads
 	for (int i = 0; i < num_threads; i++) {
 		if (pthread_create(&threads[i], NULL, thread_func, NULL) < 0) {
 			printf("error: pthread_create failed!\n");

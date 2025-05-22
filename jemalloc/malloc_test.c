@@ -7,26 +7,26 @@
 
 int block_per_thread;
 
-void* ThreadFunc(void* args)
+void *thread_func(void *arg)
 {
     for (int i = 0; i < block_per_thread; i++)
         malloc(MEMORY_BLOCK_SIZE);
 
-    return NULL;
+    return (void *)NULL;
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    int num_thread = atoi(argv[1]);
+    int num_threads = atoi(argv[1]);
 
-    block_per_thread = NUM_BLOCK / num_thread;
+    block_per_thread = NUM_BLOCK / num_threads;
 
-    pthread_t* threads = (pthread_t*)malloc(sizeof(pthread_t) * num_thread);
+    pthread_t *threads = (pthread_t *)malloc(sizeof(pthread_t) * num_threads);
 
-    for (int i = 0; i < num_thread; i++)
-        pthread_create(&threads[i], 0, ThreadFunc, NULL);
+    for (int i = 0; i < num_threads; i++)
+        pthread_create(&threads[i], 0, thread_func, NULL);
 
-    for (int i = 0; i < num_thread; i++)
+    for (int i = 0; i < num_threads; i++)
         pthread_join(threads[i], NULL);
 
     free(threads);
