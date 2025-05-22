@@ -8,35 +8,13 @@
 
 uint64_t global_count = 0;
 
-void increase_global_count(void)
-{
-	uint64_t old_value = global_count;
-	uint64_t new_value = old_value + 1;
-	global_count = new_value;
-
-	/**
-	 * @details
-	 * This function could be replaced with a single line of code:
-	 * - global_count++;
-	 * - global_count += 1;
-	 * 
-	 * However, these codes execute three instructions internally:
-	 * 1. load global_count (memory -> CPU)
-	 * 2. calculate new value
-	 * 3. store global_count (CPU -> memory)
-	 * 
-	 * The CPU executes code instruction by instruction, so writing a single
-	 * code line will eventually produce the same result.
-	 */
-}
-
 void *thread_func(void *arg)
 {
 	uint64_t local_count = 0;
 
 	for (int i = 0; i < NUM_INCREMENT; i++) {
-		increase_global_count();	// increase global count
-		local_count += 1;			// increase local count
+		global_count++;			// increase global count
+		local_count++;			// increase local count
 	}
 
 	return (void *)local_count;
