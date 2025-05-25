@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-#define MEMORY_BLOCK_SIZE       (32)
-#define NUM_BLOCK               (51200000)
+#define MEMORY_BLOCK_SIZE       (16)
+#define NUM_BLOCK               (67108864) // 64M
 
 int block_per_thread;
 
